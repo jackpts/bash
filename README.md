@@ -16,4 +16,5 @@
 ## 5. gw_ver.sh
 - To get latest groundwork stable image number from kingpin
 
-## 6.
+## 6. docker_init.sh
+- To make fast Docker container start with the latest image version.
