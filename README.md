@@ -4,4 +4,9 @@
 - To make fast cleanup of a/b testing files 
 
 ## 2. bump.sh
-** To make fast assets bump/check b/w Assets and Scaffold repo **
+- To make fast assets bump/check b/w Assets and Scaffold repo 
+
+## 3. git_branch_clean.sh
+- To clean up all local branches already merged in origin
+
+
