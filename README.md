@@ -11,5 +11,9 @@
 
 
 ## 4. gw_pull.sh
-- To make fast PULL from typical Groundwork repos and Assets start.
+- To make fast PULL from typical Groundwork repos and Assets start
 
+## 5. gw_ver.sh
+- To get latest groundwork stable image number from kingpin
+
+## 6.
