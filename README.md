@@ -10,3 +10,6 @@
 - To clean up all local branches already merged in origin
 
 
+## 4. gw_pull.sh
+- To make fast PULL from typical Groundwork repos and Assets start.
+
