@@ -18,3 +18,8 @@
 
 ## 6. docker_init.sh
 - To make fast Docker container start with the latest image version.
+
+## 7. get_artifacts.sh
+- To get list of artifacts from kingpin and provide Tomcat/Docker recent images for each one
+- To detect if the Docker process is running and then Upload the recent container 
+and run it or use the system's container if it's not outdated yet. 
