@@ -16,7 +16,12 @@ SCAFFOLD_DIR=~/git/sites-groundwork
 CMS_DIR=~/git/cms-edmunds-prod
 
 
-echo -e "${YELLOW}NOTE: pass ${GREEN}-npm${YELLOW} parameter to include running ${GREEN}npm i${YELLOW} command${NC}"
+if [[ $1 =~ ^(-npm|--npm|npm)$ ]] 
+	then
+		echo -e "${GREEN}npm i${YELLOW} will be running later..${NC}"
+	else
+		echo -e "${YELLOW}NOTE: pass ${GREEN}-npm${YELLOW} parameter to include running ${GREEN}npm i${YELLOW} command${NC}"	
+fi
 
 cd $CMS_DIR
 git checkout master
@@ -34,13 +39,13 @@ echo -e "${GREEN}PULL from ${RED}Assets${GREEN} started...${NC}"
 git pull
 echo -e "${GREEN}PULL from ${RED}Assets${GREEN} complete${NC}"
 
-	if [[ $1 == *"npm"* ]]; then
-		echo -e "${GREEN}NPM Install from ${RED}Assets${GREEN} started...${NC}"
-		npm i
-		echo -e "${GREEN}NPM Install from ${RED}Assets${GREEN} complete${NC}"
-		#read -p "Press enter to run Assets Run Dev"
-		echo -e "${GREEN}Press any key to run Assets${NC}"
-		read -n 1 -s -p "Run Dev"
-	fi
+if [[ $1 == *"npm"* ]]; then
+	echo -e "${GREEN}NPM Install from ${RED}Assets${GREEN} started...${NC}"
+	npm i
+	echo -e "${GREEN}NPM Install from ${RED}Assets${GREEN} complete${NC}"
+	#read -p "Press enter to run Assets Run Dev"
+	echo -e "${GREEN}Press any key to run Assets${NC}"
+	read -n 1 -s -p "Run Dev"
+fi
 
 npm run dev
