@@ -19,7 +19,7 @@ ART_URL='http://kingpin/api/environments/qa-21/artifacts?_dc=1517238041229&page=
 #http://nexus.prod-admin11.vip.aws1/nexus/service/local/artifact/maven/redirect?r=edmunds-release&g=com.edmunds.sites&a=dealerlocator-web&v=1.30.87&e=war
 NEXUS_LINK='http://nexus.prod-admin11.vip.aws1/nexus/service/local/artifact/maven/redirect?r=edmunds-release&g=com.edmunds.sites&a='
 
-ARRAY=('dealerlocator-web' 'vehicleresearch-web' 'vehiclelanding-web' 'review-rating-web' 'incentive-web' 'groundwork-web' 'photoflipper-web', 'common-rest-web')
+ARRAY=('dealerlocator-web' 'vehicleresearch-web' 'vehiclelanding-web' 'review-rating-web' 'incentive-web' 'groundwork-web' 'photoflipper-web' 'common-rest-web' 'inventory-web')
 ART_IN=`curl $ART_URL`
 
 #ART_ARRAY=`curl $ART_URL | python -c "import sys, json; print json.load(sys.stdin)[0]['build']['repositoryPath']"`
@@ -88,15 +88,16 @@ docker_run(){
 	#check if this container is already exists
 	##line number with TAG version
 	TAG=$2
-	LINETAG=`docker images | awk '{if ($2 == $TAG) print NR fi}'`
-	docker images | awk '$1~/common-rest-web/{ print NR }'
-	LINEREPO=`docker images | awk '$1~/common-rest-web/{ print NR }'`
-
-    if [[ $LINETAG -eq $LINEREPO ]] && [[ $LINETAG -gt 0 ]]
+	#LINETAG=`docker images | awk '{if ($2 == "$TAG") print NR fi}'`
+	#docker images | awk '$1~/common-rest-web/{ print NR }'
+	#LINEREPO=`docker images | grep "$1" | awk '{ if ($2 == "$TAG") print NR }'`
+	#LINEREPO=`docker images | grep "$1" | awk -v mytag="$TAG" '$2~/mytag/{ print NR }'`
+	LINEREPO=`docker images | grep "$1" | awk -v mytag="$TAG" '$2==mytag {print NR}'`
+	
+    if [[ $LINEREPO -gt 0 ]]
         then
-            echo -e "${GREEN}We've already found existent container in system: ${RED}$CONTAINER_NAME"
-            #sudo docker start -ai $CONTAINER_NAME
-			
+            echo -e "${GREEN}We've already found existent container in system: ${RED}$CONTAINER_NAME${NC}"
+            sudo docker start -ai $CONTAINER_NAME
         else
             echo -e "${GREEN}Container name will be: ${RED}$CONTAINER_NAME"
             echo -e "${PURPLE}Next time can be started as: ${CYAN}sudo docker start -ai $CONTAINER_NAME"
